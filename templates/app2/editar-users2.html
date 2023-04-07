@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    {% load static %}
+    <div class="contenedor-form">
+        <div class="form" style="margin-top: 60px; margin-bottom: 60px; height: 480px;">
+            {% if bool == True%}
+                    <div class="alert">{{message}}</div>
+            {% endif %}
+            <h1 style="margin: 0; margin-bottom:20px;">Cambiar Contraseña</h1>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                    {{form.as_p}}
+                <button type="submit">EDIT</button>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

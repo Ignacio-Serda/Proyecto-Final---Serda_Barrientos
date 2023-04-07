@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    {%load static%}
+    <div class="contenedor-aboutme">
+        <div class="contenedor-chico">
+            <div class="imagen-izq">
+                <img src="{%static 'img/nueva.jpeg'%}" style="height: 300px; border: 2px solid black">
+            </div>
+            <div class="text-der">
+                <div>
+                    <p style="font-size: 22px; margin:0px; margin-bottom:20px">ACERCA DE MI</p>
+                    <hr style="border: 1px solid white; margin:0px;">
+                    <br>
+                    <p>Hola! Mi nombre es Nacho, soy estudiante de secundario y tengo 17 años.
+                    <br><br>Desde chico, siempre me intrigó y me fascinó todo lo relacionado con la tecnología y programación, por ello, con el tiempo, fui indagando más y más hasta llegar al punto que me encuetro ahora, es decir, creando y publicando este blog. Todavía hay cosas que se puedem mejorar, pero espero que lo disfruten tanto como yo lo hice al armarlo. Saludos! </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

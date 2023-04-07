@@ -1,0 +1,12 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="form" style="margin-top:60px; margin-bottom:60px;">
+        <h4>CREACIÓN BLOG</h4>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+                {{form.as_p}}
+            <button type="submit">CREAR</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="contenedor-form">
+        <div class="form">
+            {% if message %}
+                <div class="alert">{{message}}</div>
+            {% endif %}
+            <h4>LOGIN</h4>
+            <form action="" method="POST">
+                {% csrf_token %}
+                    {{form.as_p}}
+                <button type="submit">LOGIN</button>
+            </form>
+            <p style="margin: 0; margin-bottom: 10px; font-weight: 600;">¿No estás registrado?</p>
+            <a class="register-a"href="{% url 'REGISTER' %}">Registrarse</a>
+        </div>
+    </div>
+{% endblock %}

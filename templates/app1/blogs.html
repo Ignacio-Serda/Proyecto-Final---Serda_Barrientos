@@ -1,0 +1,43 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+    {% if blogs %}
+            <div class="contenedor">
+                {%for blog in blogs%}     
+                    <div class="blog">
+                        <div class="blog-title">
+                            <p>{{blog.titulo}}</p>
+                        </div>
+                        <div class="blog-subtitle">
+                            <p>{{blog.subtitulo}}</p>
+                        </div>
+                        <div class="blog-body">
+                            <p>{{blog.cuerpo|linebreaks}}</p>
+                        </div>
+                        <div class="blog-description">
+                            <p class="autor">{{blog.autor}}</p> <p class="fecha">{{blog.fecha}}</p>
+                        </div>
+                        <div class="extra-blog">
+                            <a class="leer-mas" href="{% url 'LEER_MAS' blog.id %}">Leer más</a>
+                            
+                            {% if nombre_completo == blog.autor or user.is_staff %}
+
+                                <a class="leer-mas" href="{% url 'EDIT-BLOG' blog.id %}">Edit</a>
+                                <a class="leer-mas" href="{% url 'DELETE' blog.id %}">Delete</a>
+                
+                            {% endif %}
+                        </div>
+                        
+                    </div>
+                {%endfor%}
+            </div>
+    {% else %}
+        <div class="no_blogs">
+            <div class="no_blogs_inside">          
+                <p>No hay blogs subidos :/</p>
+            </div>  
+        </div>
+    {% endif %}
+
+{% endblock %}

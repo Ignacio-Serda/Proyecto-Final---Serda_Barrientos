@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="form" style="margin-top:60px; margin-bottom:60px;">
+        {% if message %}
+                <div class="alert">{{message}}</div>
+        {% endif %}
+        <h4>REGISTRO</h4>
+
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+                {{form.as_p}}
+            <button type="submit">REGISTRARSE</button>
+            <p style="margin: 0; margin-bottom: 10px; font-weight: 600;">¿Ya tienes una cuenta?</p>
+            <a class="register-a"href="{% url 'LOGIN' %}">Loguearse</a>
+        </form>
+    </div>
+{% endblock %}

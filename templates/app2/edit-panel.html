@@ -1,0 +1,59 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+    <div class="tabla-content">
+        <div class="tabla-user">
+            <table>
+                {% if users %}
+                    <thead>
+                        <tr>
+                            <th>Usuario</th><th style="margin:0; padding: 0; width: 0;"></th><th style="margin:0; padding: 0; width: 0;"></th>
+                        </tr>
+                    </thead>
+                    {% for user in users %}
+                        {% if not user.is_superuser %}
+                            <tr>
+                                <td>{{user.username}}</td>
+                                <td><a href="{% url 'EDIT-USER' user.id %}" class="btn">EDITAR</a></td>
+                                <td><a href="{% url 'ELIMINATE-USERS' user.id %}" class="btn">BORRAR</a></td>
+                            </tr>
+                        {%endif%}
+                    {% endfor %}
+                {% else %}
+                    <thead>
+                        <tr>
+                            <th>No hay Users</th>
+                        </tr>
+                    </thead>
+                {% endif %}
+            </table>
+            <table style="margin-bottom: 0;">
+                {% if blogs %}
+                    <thead>
+                        <tr>
+                            <th>Titulo</th><th>Autor</th><th>Fecha</th><th style="margin:0; padding: 0; width: 0;"></th><th style="margin:0; padding: 0; width: 0;"></th>
+                        </tr>
+                    </thead>
+                    
+                        {% for blog in blogs %}
+                            <tr>
+                                <td>{{blog.titulo}}</td>
+                                <td>{{blog.autor}}</td>
+                                <td>{{blog.fecha}}</td>
+                                <td><a href="{% url 'EDIT-BLOG' blog.id %}" class="btn">EDITAR</a></td>
+                                <td><a href="{% url 'ELIMINATE-BLOGS' blog.id %}" class="btn">BORRAR</a></td>
+                            </tr>
+                        {% endfor %}
+                {% else %}
+                    <thead>
+                        <tr>
+                            <th>No hay Blogs</th>
+                        </tr>
+                    </thead>
+                {% endif %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

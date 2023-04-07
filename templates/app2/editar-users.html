@@ -1,0 +1,18 @@
+{% extends 'index.html' %}
+
+{% block content %}
+ 
+    {% load static %}
+    <div class="form" style="margin-top: 60px; margin-bottom: 60px;">
+        <h1 style="margin: 0; margin-bottom:20px;">EDITAR</h1>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+                {{form.as_p}}
+            <button type="submit">EDIT</button>
+            <br>
+            <br>
+            <a href="/editar2/{{id}}" class="register-a">Cambiar Contraseña</a>
+        </form>
+    </div>
+
+{% endblock %}

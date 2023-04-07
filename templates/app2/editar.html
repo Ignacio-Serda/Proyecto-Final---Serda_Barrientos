@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% block content %}
+ 
+    <div class="form" style="margin-top: 60px; margin-bottom: 60px;">
+        {% if messages %}
+            {% for message in messages%}
+                <div class="alert">{{message}}</div>
+            {% endfor %}
+        {% endif %}
+        <h1 style="margin: 0; margin-bottom:20px;">Editar Usuario</h1>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+                {{form.as_p}}
+            <button type="submit">Editar</button>
+        </form>
+    </div>
+
+{% endblock %}

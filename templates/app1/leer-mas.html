@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    {% load static %}
+    <div class="hub-leer-mas">
+        {% if blog.imagen %}
+            <img class="hub-img" src="/media/{{blog.imagen}}">
+        {% else %}
+        <img class="hub-img" src="{%static 'img/PRUEBA.png' %}">
+        {% endif %}
+        <h2>{{blog.titulo}}</h2>
+    </div>
+    <div class="flex-leermas">
+        <div class="content">
+            <div class="subtitulo-content">
+                <p>{{blog.subtitulo}}</p>
+                <br>
+                <hr style="width: 80%; border: 1px solid black">
+            </div>
+            <div class="cuerpo-content">
+                <p>{{blog.cuerpo|linebreaks}}</p>
+            </div>
+            <div class="autor-content">
+                <p style="margin-bottom: 30px;">{{blog.autor}}</p>
+            </div>
+            <hr style="width: 80%; border: 1px solid black">
+            <div class="comentarios">
+                <p style="text-align: left;">Comentarios</p>
+                <div class="form-comentarios">
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                            {{form.as_p}}
+                        <button type="submit" class="boton">Comentar</button>
+                    </form>
+                </div>
+                
+                {% if comentarios %}
+                    <div class="caja-comentarios">
+                        {% for comentario in comentarios %}
+                            <p class="texto-coment">{{comentario.contenido}}</p>
+                            <p class="autor-coment">{{comentario.nombre}}</p>
+                            <p class="autor-coment">{{comentario.fecha}}</p>
+                            <hr>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class="caja-comentarios" style="display: flex; justify-content: center; align-items: center;">
+                            <p>No hay comentarios.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

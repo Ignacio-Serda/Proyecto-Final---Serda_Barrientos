@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'main.css' %}" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400&display=swap" rel="stylesheet">
+    <title>Blog</title>
+</head>
+<body>
+    <header>
+        <a href="{% url 'HOME' %}" class="logo">
+            <img src="{% static 'img/logo-posta.png' %}" alt="logo">
+            <h2 class="nombre-pag"> MiBlog.com </h2>
+        </a>
+        <nav>
+            {% if user.is_authenticated  %}
+                <a href="{% url 'BLOGS' %}" class="nav-link">BLOGS</a>
+                <a href="{% url 'CREATION_BLOG' %}" class="nav-link">POST</a>
+                <a href="{% url 'ABOUT_ME' %}" class="nav-link">ACERCA DE MI</a>      
+            {% else %}
+                <a href="{% url 'LOGIN' %}" class="nav-link"> LOGIN</a>
+                <a href="{% url 'REGISTER' %}" class="nav-link"> REGISTER</a>
+            {% endif %}
+
+
+            
+        </nav>
+        {% if user.is_authenticated %}
+            <div class="inblock">
+                {% if user.avatar.imagen.url  %}
+                    <img src="{{user.avatar.imagen.url }}" alt="user" style="height: 40px; width: 40px; border-radius: 80%;">
+                {% else %}
+                    <img src="{% static 'img/non_profile.jpg' %}" alt="user" style="height: 40px; width: 40px; border-radius: 80%;">
+                {% endif %}
+                <p>Hola, </p>
+                <a href="{% url 'PROFILE' %}" class="user">{{user}}</a>
+                <a href="{% url 'LOGOUT' %}" class="btn" style="font-size: 18px;"> LOG-OUT</a> 
+                {% if user.is_superuser  %}
+                    <a href="{% url 'EDIT-PANEL' %}" class="btn" style="font-size: 18px;"> EDIT</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </header>
+
+
+    {% block content %}
+        <div class="flex">
+            <div class="index">
+                <h4 style="margin:0px;"> Blogs Recientes</h4>
+                {% if blogs %}
+                    
+                        {% for blog in blogs %}
+                            <div class="index-items">
+                                <p class="autor-items">{{blog.autor}}</p>
+                                {% if user.is_authenticated  %}
+                                    <a href="{% url 'LEER_MAS' blog.id %}">{{blog.titulo}}</a> 
+                                {% else %}
+                                    <a href="{% url 'LOGIN' %}">{{blog.titulo}}</a> 
+                                {% endif %}
+                                <p class="subtitulo">{{blog.subtitulo}}</p>
+                            </div>
+                        {% endfor %}
+
+                {% else %}
+                    <div class="no-hay-blogs" style="border-bottom: 0px;">
+                        <p>No hay blogs recientes :/</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endblock %}
+
+
+    <footer>
+        <a class="footer-texto">
+            <p> Copyright © 2023 Ignacio Serdá </p>
+
+        </a>
+    </footer>
+</body>
+</html>
